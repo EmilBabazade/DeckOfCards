@@ -1,19 +1,16 @@
 import React from 'react';
-
-interface CardProps {
-    zIndex: number;
-}
+import { CardProps } from './props/CardProps';
 
 class Card extends React.Component<CardProps> {
   render() {
-    const rotation = Math.floor(Math.random() * 180) + 1;
+    const {rotation, zIndex, imgUrl, moveHorizontal, moveVertical} = this.props;
     const style: React.CSSProperties = {
         top: '300px',
-        transform: `rotate(${rotation}deg)`,
-        zIndex: this.props.zIndex,
+        transform: `rotate(${rotation}deg) translate(${moveHorizontal}px, ${moveVertical}px)`,
+        zIndex: zIndex,
         position: 'absolute'
     };
-    return <img style={style} src='https://deckofcardsapi.com/static/img/QD.png' alt='card' />;
+    return <img style={style} src={imgUrl} alt='card' />;
   }
 
   componentDidMount() {
